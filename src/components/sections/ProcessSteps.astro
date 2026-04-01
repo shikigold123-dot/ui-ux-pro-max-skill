@@ -1,0 +1,47 @@
+---
+interface Step {
+  number: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+  light?: boolean;
+}
+
+const { steps, light = false } = Astro.props;
+---
+
+<div class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8`}>
+  {steps.map((step, index) => (
+    <div class="flex flex-col gap-4 relative">
+      <!-- Connector line (desktop) -->
+      {index < steps.length - 1 && (
+        <div
+          class="hidden lg:block absolute top-6 left-[3.5rem] right-0 h-px"
+          style={light ? 'background-color: rgba(255,255,255,0.12);' : 'background-color: rgba(27,43,75,0.15);'}
+          aria-hidden="true"
+        ></div>
+      )}
+
+      <div class="flex items-center gap-4">
+        <div
+          class="step-number"
+          style={light ? 'background-color: rgba(255,255,255,0.15); color: #fff;' : ''}
+        >
+          {step.number}
+        </div>
+      </div>
+
+      <div>
+        <h3 class={`font-serif font-bold text-lg leading-snug mb-2 ${light ? 'text-white' : 'text-navy'}`}>
+          {step.title}
+        </h3>
+        <p class={`text-sm leading-relaxed ${light ? 'text-white/70' : 'text-muted'}`}>
+          {step.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>

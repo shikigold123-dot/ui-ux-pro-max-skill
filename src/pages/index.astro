@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import SectionHeading from '../components/sections/SectionHeading.astro';
+import PullQuote from '../components/sections/PullQuote.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+import ProcessSteps from '../components/sections/ProcessSteps.astro';
+import AccordionFAQ from '../components/sections/AccordionFAQ.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import { homepageFaq } from '../data/faq';
+import { buildLocalBusinessSchema } from '../utils/schema';
+
+const schema = buildLocalBusinessSchema();
+
+const personIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
+const shieldIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+
+const calendarIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+
+const processSteps = [
+  {
+    number: '1',
+    title: 'Terminübermittlung',
+    description: 'Die Praxis übermittelt Termin, Abholadresse und Patienteninformationen an Axiom Medical Transfer.',
+  },
+  {
+    number: '2',
+    title: 'Organisation',
+    description: 'Axiom übernimmt die vollständige Koordination — Fahrer, Fahrzeug, Route und Timing.',
+  },
+  {
+    number: '3',
+    title: 'Abholung & Begleitung',
+    description: 'Der Patient wird pünktlich abgeholt und persönlich und sorgfältig zum Termin begleitet.',
+  },
+  {
+    number: '4',
+    title: 'Rückfahrt',
+    description: 'Nach dem Termin übernehmen wir ebenso zuverlässig die Heimfahrt — ohne Wartezeiten.',
+  },
+];
+---
+
+<BaseLayout
+  title="Axiom Medical Transfer — Medizinische Einzeltransfers in Düsseldorf"
+  description="Diskrete, exklusive medizinische Transferleistungen für Praxen, Kliniken und Patienten in Düsseldorf, Meerbusch, Ratingen, Neuss und Köln. Lizenziert nach § 49 PBefG."
+  schema={schema}
+>
+  <!-- 1. Hero -->
+  <HeroSection
+    label="Axiom Medical Transfer"
+    heading="Medizinische<br />Einzeltransfers<br /><em class='italic' style='color: rgba(240,242,245,0.8);'>mit Anspruch.</em>"
+    subheading="Diskrete Transfers für Praxen, Kliniken und Patienten — für Momente, die mehr verlangen als eine gewöhnliche Fahrt."
+    ctaPrimary={{ text: 'Kooperation anfragen', href: '/kontakt' }}
+    ctaSecondary={{ text: 'Leistungen entdecken', href: '/leistungen' }}
+    showServicePills={true}
+  />
+
+  <!-- 2. Warum Axiom? -->
+  <section class="section" style="background-color: #F0F2F5;">
+    <div class="container">
+      <SectionHeading
+        label="Ihr Transfer"
+        heading="Warum Axiom Medical Transfer?"
+      />
+
+      <!-- Pull Quote -->
+      <div class="mb-14 md:mb-18">
+        <PullQuote
+          quote="Eine Fahrt sieht von außen immer gleich aus: ein Fahrzeug, ein Ziel, eine Zeit. Was ein Mensch auf dem Rücksitz trägt, bleibt unsichtbar für die, die nicht genau hinschauen."
+        />
+      </div>
+
+      <!-- Two column text -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-14">
+        <div>
+          <p class="text-base leading-relaxed text-muted">
+            Viele Patienten verlassen eine Praxis oder Klinik in einem Zustand, in dem eine normale Fahrt mit einem Taxi oder die Nutzung öffentlicher Verkehrsmittel eine Belastung darstellt. Nach einer Chemotherapie, einem ambulanten Eingriff oder einer intensiven diagnostischen Untersuchung sind Erschöpfung, Schmerzen oder Unsicherheit keine Ausnahmen — sie sind der Normalfall.
+          </p>
+        </div>
+        <div>
+          <p class="text-base leading-relaxed text-muted">
+            Axiom Medical Transfer schließt genau diese Lücke. Wir bieten Praxen und Kliniken einen verlässlichen Partner für den Heimtransport ihrer Patienten — exklusiv, diskret und mit dem nötigen Feingefühl. Jede Fahrt wird individuell koordiniert. Keine Wartezeiten, keine geteilten Fahrzeuge, kein Stress.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <FeatureCard
+          icon={personIcon}
+          title="Entlastung für die Praxis"
+          body="Transfers werden organisiert, ohne den Praxisbetrieb zu belasten. Die Abholung ist zuverlässig geregelt — Ihr Team kann sich auf das Wesentliche konzentrieren."
+          variant="light"
+        />
+        <FeatureCard
+          icon={shieldIcon}
+          title="Diskretion für Patienten"
+          body="Medizinische Termine und sensible Situationen werden mit der angemessenen Sorgfalt und Vertraulichkeit behandelt. Kein Smalltalk, keine unnötigen Fragen."
+          variant="light"
+        />
+        <FeatureCard
+          icon={calendarIcon}
+          title="Verlässliche Organisation"
+          body="Koordinierte Abholung, Rückfahrt und alle Schritte dazwischen sind präzise strukturiert. Pünktlichkeit und Zuverlässigkeit sind unser Versprechen."
+          variant="light"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Process Steps -->
+  <section class="section" style="background-color: #1B2B4B;">
+    <div class="container">
+      <SectionHeading
+        label="Ablauf"
+        heading="Wie eine Kooperation funktioniert"
+        light={true}
+        subheading="Ein klarer, einfacher Prozess — damit Sie sich auf Ihre Patienten konzentrieren können."
+      />
+      <ProcessSteps steps={processSteps} light={true} />
+    </div>
+  </section>
+
+  <!-- 4. FAQ -->
+  <section class="section" style="background-color: #F0F2F5;">
+    <div class="container">
+      <SectionHeading
+        label="FAQ"
+        heading="Häufig gestellte Fragen"
+        subheading="Antworten auf die wichtigsten Fragen rund um unsere Leistungen und Kooperationsmöglichkeiten."
+      />
+      <AccordionFAQ items={homepageFaq} />
+    </div>
+  </section>
+
+  <!-- 5. CTA Band -->
+  <CTABand
+    heading="Ihr Anspruch endet nicht an der Praxistür."
+    subheading="Wir begleiten Ihre Patienten darüber hinaus — diskret, zuverlässig und persönlich."
+    ctaPrimary={{ text: 'Kooperation anfragen', href: '/kontakt' }}
+    ctaSecondary={{ text: 'Leistungen ansehen', href: '/leistungen' }}
+  />
+</BaseLayout>

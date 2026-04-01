@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Vielen Dank | Axiom Medical Transfer"
+  description="Ihre Anfrage wurde erfolgreich übermittelt."
+  noindex={true}
+>
+  <section
+    class="min-h-[100dvh] flex items-center justify-center"
+    style="background-color: #1B2B4B; padding-top: 72px;"
+  >
+    <!-- Subtle wave bg -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <path class="wave-1" d="M-200 500 Q400 250 900 380 Q1200 460 1700 300 L1700 950 L-200 950 Z" fill="rgba(255,255,255,0.04)"/>
+        <path class="wave-2" d="M-200 600 Q300 400 800 480 Q1150 550 1700 420 L1700 950 L-200 950 Z" fill="rgba(240,242,245,0.03)"/>
+      </svg>
+    </div>
+
+    <div class="container relative z-10 text-center max-w-[560px]">
+      <!-- Checkmark icon -->
+      <div
+        class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-8 animate-fade-up"
+        style="background: rgba(240,242,245,0.12); border: 1.5px solid rgba(240,242,245,0.25);"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+
+      <span class="label-tag-light animate-fade-up-delay-1">Anfrage eingegangen</span>
+
+      <h1 class="section-heading text-white mt-4 mb-5 animate-fade-up-delay-2">
+        Vielen Dank für<br />Ihre Anfrage.
+      </h1>
+
+      <p class="text-white/70 text-lg leading-relaxed mb-10 animate-fade-up-delay-3">
+        Ihre Nachricht ist bei uns eingegangen. Wir melden uns in der Regel innerhalb eines Werktages bei Ihnen — telefonisch oder per E-Mail.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 animate-fade-up-delay-4">
+        <a href="/" class="btn-primary">
+          Zur Startseite
+        </a>
+        <a href="/leistungen" class="btn-ghost-light">
+          Leistungen ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

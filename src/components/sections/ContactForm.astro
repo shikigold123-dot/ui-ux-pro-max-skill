@@ -1,0 +1,260 @@
+---
+---
+
+<div
+  x-data="contactForm()"
+  class="w-full"
+>
+  <!-- Success Message -->
+  <div
+    x-show="success"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 translate-y-2"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    class="bg-green-50 border border-green-200 rounded-xl p-8 text-center"
+    role="alert"
+  >
+    <div class="flex justify-center mb-4">
+      <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+    </div>
+    <h3 class="font-serif font-bold text-navy text-xl mb-2">Vielen Dank für Ihre Nachricht!</h3>
+    <p class="text-muted text-sm leading-relaxed">
+      Wir haben Ihre Anfrage erhalten und melden uns innerhalb eines Werktages bei Ihnen. Bei dringenden Anliegen erreichen Sie uns unter <a href="tel:+4921133775576" class="text-navy underline">0211 337755765</a>.
+    </p>
+  </div>
+
+  <!-- Form -->
+  <form
+    x-show="!success"
+    @submit.prevent="submitForm($event)"
+    novalidate
+    class="space-y-5"
+    aria-label="Kontaktformular"
+  >
+    <!-- Hidden Web3Forms inputs -->
+    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+    <input type="hidden" name="subject" value="Neue Kontaktanfrage — Axiom Medical Transfer" />
+    <input type="hidden" name="from_name" value="Axiom Medical Transfer Website" />
+    <input type="hidden" name="redirect" value="https://www.axiom-medical-transfer.de/danke" />
+
+    <!-- Name -->
+    <div>
+      <label for="field-name" class="form-label">
+        Name <span class="text-red-500" aria-hidden="true">*</span>
+      </label>
+      <input
+        id="field-name"
+        type="text"
+        name="name"
+        x-model="fields.name"
+        :class="errors.name ? 'form-input error' : 'form-input'"
+        autocomplete="name"
+        aria-required="true"
+        :aria-describedby="errors.name ? 'error-name' : undefined"
+      />
+      <span id="error-name" class="form-error" x-show="errors.name" x-text="errors.name" role="alert"></span>
+    </div>
+
+    <!-- Institution -->
+    <div>
+      <label for="field-institution" class="form-label">
+        Institution / Praxis <span class="text-red-500" aria-hidden="true">*</span>
+      </label>
+      <input
+        id="field-institution"
+        type="text"
+        name="institution"
+        x-model="fields.institution"
+        :class="errors.institution ? 'form-input error' : 'form-input'"
+        autocomplete="organization"
+        aria-required="true"
+        :aria-describedby="errors.institution ? 'error-institution' : undefined"
+      />
+      <span id="error-institution" class="form-error" x-show="errors.institution" x-text="errors.institution" role="alert"></span>
+    </div>
+
+    <!-- Email + Phone row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="field-email" class="form-label">
+          E-Mail-Adresse <span class="text-red-500" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="field-email"
+          type="email"
+          name="email"
+          x-model="fields.email"
+          :class="errors.email ? 'form-input error' : 'form-input'"
+          autocomplete="email"
+          aria-required="true"
+          :aria-describedby="errors.email ? 'error-email' : undefined"
+        />
+        <span id="error-email" class="form-error" x-show="errors.email" x-text="errors.email" role="alert"></span>
+      </div>
+      <div>
+        <label for="field-phone" class="form-label">Telefonnummer</label>
+        <input
+          id="field-phone"
+          type="tel"
+          name="phone"
+          x-model="fields.phone"
+          class="form-input"
+          autocomplete="tel"
+        />
+      </div>
+    </div>
+
+    <!-- Art der Anfrage -->
+    <div>
+      <label for="field-type" class="form-label">Art der Anfrage</label>
+      <select
+        id="field-type"
+        name="inquiry_type"
+        x-model="fields.type"
+        class="form-input"
+      >
+        <option value="">Bitte wählen …</option>
+        <option value="Einzeltransfer">Einzeltransfer</option>
+        <option value="Kooperation Praxis">Kooperation Praxis</option>
+        <option value="Kooperation Klinik">Kooperation Klinik</option>
+        <option value="Sonstiges">Sonstiges</option>
+      </select>
+    </div>
+
+    <!-- Nachricht -->
+    <div>
+      <label for="field-message" class="form-label">
+        Nachricht <span class="text-red-500" aria-hidden="true">*</span>
+      </label>
+      <textarea
+        id="field-message"
+        name="message"
+        rows="5"
+        x-model="fields.message"
+        :class="errors.message ? 'form-input error' : 'form-input'"
+        aria-required="true"
+        :aria-describedby="errors.message ? 'error-message' : undefined"
+        style="resize: vertical; min-height: 130px;"
+      ></textarea>
+      <span id="error-message" class="form-error" x-show="errors.message" x-text="errors.message" role="alert"></span>
+    </div>
+
+    <!-- DSGVO Checkbox -->
+    <div>
+      <label class="flex items-start gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          name="dsgvo"
+          x-model="fields.dsgvo"
+          :class="errors.dsgvo ? 'mt-0.5 w-4 h-4 accent-navy cursor-pointer border-red-500' : 'mt-0.5 w-4 h-4 accent-navy cursor-pointer'"
+          aria-required="true"
+        />
+        <span class="text-sm text-muted leading-relaxed">
+          Ich habe die <a href="/datenschutz" class="text-navy underline underline-offset-2 hover:text-navy-light">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. <span class="text-red-500" aria-hidden="true">*</span>
+        </span>
+      </label>
+      <span class="form-error" x-show="errors.dsgvo" x-text="errors.dsgvo" role="alert"></span>
+    </div>
+
+    <!-- General error -->
+    <div x-show="errors.general" class="bg-red-50 border border-red-200 rounded-lg p-4" role="alert">
+      <p class="text-sm text-red-700" x-text="errors.general"></p>
+    </div>
+
+    <!-- Submit -->
+    <div class="pt-1">
+      <button
+        type="submit"
+        :disabled="submitting"
+        :class="submitting ? 'opacity-60 cursor-not-allowed' : ''"
+        class="btn-primary w-full justify-center"
+      >
+        <span x-show="!submitting">Nachricht senden</span>
+        <span x-show="submitting" class="flex items-center gap-2">
+          <svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" opacity="0.3"/>
+            <path d="M21 12a9 9 0 00-9-9"/>
+          </svg>
+          Wird gesendet …
+        </span>
+      </button>
+      <p class="text-xs text-muted mt-3 text-center">
+        Felder mit <span class="text-red-500">*</span> sind Pflichtfelder.
+      </p>
+    </div>
+  </form>
+</div>
+
+<script>
+  function contactForm() {
+    return {
+      fields: {
+        name: '',
+        institution: '',
+        email: '',
+        phone: '',
+        type: '',
+        message: '',
+        dsgvo: false,
+      },
+      errors: {} as Record<string, string>,
+      submitting: false,
+      success: false,
+
+      validate(): boolean {
+        this.errors = {};
+        if (!this.fields.name.trim()) {
+          this.errors.name = 'Bitte geben Sie Ihren Namen ein.';
+        }
+        if (!this.fields.institution.trim()) {
+          this.errors.institution = 'Bitte geben Sie Ihre Institution oder Praxis an.';
+        }
+        if (!this.fields.email.trim()) {
+          this.errors.email = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.fields.email)) {
+          this.errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+        }
+        if (!this.fields.message.trim()) {
+          this.errors.message = 'Bitte geben Sie Ihre Nachricht ein.';
+        }
+        if (!this.fields.dsgvo) {
+          this.errors.dsgvo = 'Bitte stimmen Sie der Datenschutzerklärung zu.';
+        }
+        return Object.keys(this.errors).length === 0;
+      },
+
+      async submitForm(event: Event) {
+        if (!this.validate()) return;
+        this.submitting = true;
+        this.errors = {};
+        try {
+          const form = event.target as HTMLFormElement;
+          const formData = new FormData(form);
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+          });
+          const data = await response.json();
+          if (response.ok && data.success) {
+            this.success = true;
+          } else {
+            this.errors.general = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.';
+          }
+        } catch (_) {
+          this.errors.general = 'Die Verbindung konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung.';
+        } finally {
+          this.submitting = false;
+        }
+      },
+    };
+  }
+
+  document.addEventListener('alpine:init', () => {
+    // @ts-ignore
+    Alpine.data('contactForm', contactForm);
+  });
+</script>

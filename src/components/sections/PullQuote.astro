@@ -1,0 +1,42 @@
+---
+interface Props {
+  quote: string;
+  attribution?: string;
+  light?: boolean;
+  subtext?: string;
+}
+
+const { quote, attribution, light = false, subtext } = Astro.props;
+---
+
+<div class={`max-w-[780px] mx-auto text-center relative ${light ? '' : ''}`}>
+  <!-- Decorative quotation mark -->
+  <div class="mb-6 flex justify-center" aria-hidden="true">
+    <svg width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M0 40V24.667C0 17.778 1.556 12.333 4.667 8.333 7.778 4.222 12.556 1.444 19 0l2.333 4c-3.889 1-6.833 2.778-8.833 5.333-2 2.556-3.056 5.667-3.167 9.334H16V40H0zm26.667 0V24.667c0-6.889 1.555-12.334 4.666-16.334C34.444 4.222 39.222 1.444 45.667 0L48 4c-3.889 1-6.833 2.778-8.833 5.333-2 2.556-3.056 5.667-3.167 9.334H42.667V40H26.667z"
+        fill={light ? 'rgba(255,255,255,0.15)' : 'rgba(27,43,75,0.1)'}
+      />
+    </svg>
+  </div>
+
+  <blockquote>
+    <p class={`pull-quote ${light ? 'text-white' : 'text-navy'}`}>
+      {quote}
+    </p>
+
+    {attribution && (
+      <footer class="mt-5">
+        <cite class={`font-sans font-semibold text-xs tracking-[0.12em] uppercase not-italic ${light ? 'text-white/50' : 'text-muted'}`}>
+          — {attribution}
+        </cite>
+      </footer>
+    )}
+  </blockquote>
+
+  {subtext && (
+    <p class={`mt-6 text-base leading-relaxed max-w-[620px] mx-auto ${light ? 'text-white/70' : 'text-muted'}`}>
+      {subtext}
+    </p>
+  )}
+</div>

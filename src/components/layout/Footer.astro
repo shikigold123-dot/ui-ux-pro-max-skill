@@ -1,0 +1,149 @@
+---
+import { footerNav, serviceAreas } from '../../data/navigation';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer style="background-color: #111D33;" class="text-white" role="contentinfo">
+  <div class="container section">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+
+      <!-- Brand Column -->
+      <div class="lg:col-span-1">
+        <a href="/" class="flex items-center gap-3 no-underline mb-5 group" aria-label="Axiom Medical Transfer">
+          <div class="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center flex-shrink-0">
+            <span class="font-serif font-bold text-base text-white leading-none">A</span>
+          </div>
+          <div class="flex flex-col leading-none">
+            <span class="font-sans font-semibold text-[0.8125rem] tracking-[0.15em] uppercase text-white">AXIOM</span>
+            <span class="font-sans font-normal text-[0.65rem] tracking-[0.08em] uppercase text-white/50">Medical Transfer</span>
+          </div>
+        </a>
+        <p class="text-sm text-white/60 leading-relaxed font-serif italic max-w-[240px]">
+          "Jeder Mensch, den wir begleiten, verdient es, gesehen zu werden."
+        </p>
+        <p class="mt-4 text-xs text-white/40 leading-relaxed">
+          Inhaberin: Saida Taufek<br />
+          Lizenz gemäß § 49 PBefG
+        </p>
+      </div>
+
+      <!-- Contact Column -->
+      <div>
+        <h3 class="text-xs font-semibold tracking-[0.12em] uppercase text-white/40 mb-5">Kontakt</h3>
+        <ul class="space-y-4">
+          <li>
+            <a href="tel:+4921133775576" class="flex items-start gap-3 no-underline group">
+              <span class="mt-0.5 flex-shrink-0 text-white/40 group-hover:text-white/70 transition-colors">
+                <!-- Phone icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+                </svg>
+              </span>
+              <span class="text-sm text-white/70 group-hover:text-white transition-colors">0211 337755765</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:axiom@medicaltransfer.de" class="flex items-start gap-3 no-underline group">
+              <span class="mt-0.5 flex-shrink-0 text-white/40 group-hover:text-white/70 transition-colors">
+                <!-- Email icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="M22 7l-10 7L2 7"/>
+                </svg>
+              </span>
+              <span class="text-sm text-white/70 group-hover:text-white transition-colors break-all">axiom@medicaltransfer.de</span>
+            </a>
+          </li>
+          <li>
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 flex-shrink-0 text-white/40">
+                <!-- Location icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+              <address class="text-sm text-white/70 not-italic leading-relaxed">
+                Rotdornstraße 59<br />40472 Düsseldorf
+              </address>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 flex-shrink-0 text-white/40">
+                <!-- Clock icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+              <div class="text-sm text-white/70 leading-relaxed">
+                Mo–Fr: 07:00–20:00 Uhr<br />
+                Sa: 08:00–16:00 Uhr
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Company Nav Column -->
+      <div>
+        <h3 class="text-xs font-semibold tracking-[0.12em] uppercase text-white/40 mb-5">Navigation</h3>
+        <ul class="space-y-2.5">
+          {footerNav.company.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm text-white/60 hover:text-white transition-colors no-underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal Nav Column -->
+      <div>
+        <h3 class="text-xs font-semibold tracking-[0.12em] uppercase text-white/40 mb-5">Rechtliches</h3>
+        <ul class="space-y-2.5">
+          {footerNav.legal.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm text-white/60 hover:text-white transition-colors no-underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div style="border-top: 1px solid rgba(255,255,255,0.08);">
+    <div class="container py-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+          <p class="text-xs text-white/40">
+            &copy; {currentYear} Axiom Medical Transfer · Saida Taufek · Alle Rechte vorbehalten
+          </p>
+          <span class="hidden sm:block text-white/20">·</span>
+          <p class="text-xs text-white/40">Lizenzierter Personenbeförderungsbetrieb gem. § 49 PBefG</p>
+        </div>
+        <!-- Service Area Pills -->
+        <div class="flex flex-wrap gap-1.5">
+          {serviceAreas.map((area) => (
+            <span class="text-[0.6875rem] text-white/40 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-full">
+              {area}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

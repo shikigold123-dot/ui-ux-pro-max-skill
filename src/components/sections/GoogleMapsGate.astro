@@ -1,0 +1,108 @@
+---
+interface Props {
+  embedUrl: string;
+  address: string;
+}
+
+const { embedUrl, address } = Astro.props;
+---
+
+<div
+  x-data={`mapsGate('${embedUrl}')`}
+  x-init="checkConsent()"
+  class="w-full rounded-xl overflow-hidden"
+  style="min-height: 420px;"
+>
+  <!-- Placeholder (shown when not accepted) -->
+  <div
+    x-show="!accepted"
+    class="maps-placeholder"
+    role="region"
+    aria-label="Google Maps Zustimmung erforderlich"
+  >
+    <!-- Map Pin Icon -->
+    <div class="w-14 h-14 bg-navy/10 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    </div>
+    <div class="text-center max-w-[320px]">
+      <p class="font-semibold text-navy text-sm mb-1">Karte nicht geladen</p>
+      <p class="text-sm text-muted leading-relaxed">
+        Um Google Maps anzuzeigen, ist eine Datenübertragung an Google LLC (USA) erforderlich. Durch das Aktivieren stimmen Sie dieser Übertragung zu.
+        <a href="/datenschutz" class="text-navy underline underline-offset-2 hover:text-navy-light ml-1">Datenschutzerklärung</a>
+      </p>
+    </div>
+    <button
+      @click="accept()"
+      class="btn-primary text-sm py-2.5 px-5 min-h-[44px]"
+    >
+      Karte aktivieren
+    </button>
+  </div>
+
+  <!-- Map (shown when accepted) -->
+  <template x-if="accepted">
+    <div>
+      <iframe
+        :src="mapUrl"
+        width="100%"
+        height="420"
+        style="border:0; display:block;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        :title="`Karte: ${address}`"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </template>
+</div>
+
+<script>
+  function mapsGate(embedUrl: string) {
+    return {
+      accepted: false,
+      mapUrl: '',
+      embedUrlStored: embedUrl,
+
+      checkConsent() {
+        const stored = localStorage.getItem('axiom_cookie_consent');
+        if (stored) {
+          try {
+            const prefs = JSON.parse(stored);
+            this.accepted = prefs.functional === true;
+          } catch (_) {}
+        }
+        // Listen for future consent changes
+        window.addEventListener('cookie-consent-saved', (event: Event) => {
+          const detail = (event as CustomEvent).detail;
+          this.accepted = detail?.functional === true;
+          if (this.accepted) {
+            this.mapUrl = this.embedUrlStored;
+          }
+        });
+      },
+
+      accept() {
+        // Update localStorage
+        const stored = localStorage.getItem('axiom_cookie_consent');
+        let prefs: Record<string, unknown> = { necessary: true, functional: false, analytics: false };
+        if (stored) {
+          try { prefs = JSON.parse(stored); } catch (_) {}
+        }
+        prefs.functional = true;
+        prefs.savedAt = new Date().toISOString();
+        localStorage.setItem('axiom_cookie_consent', JSON.stringify(prefs));
+        window.dispatchEvent(new CustomEvent('cookie-consent-saved', { detail: prefs }));
+        this.mapUrl = this.embedUrlStored;
+        this.accepted = true;
+      },
+    };
+  }
+
+  document.addEventListener('alpine:init', () => {
+    // @ts-ignore
+    Alpine.data('mapsGate', (embedUrl: string) => mapsGate(embedUrl));
+  });
+</script>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  body: string;
+  variant: 'light' | 'dark';
+}
+
+const { icon, title, body, variant } = Astro.props;
+---
+
+{variant === 'light' ? (
+  <div class="card-white flex flex-col gap-4">
+    <div class="icon-box" aria-hidden="true">
+      <Fragment set:html={icon} />
+    </div>
+    <div>
+      <h3 class="font-serif font-bold text-navy text-lg leading-snug mb-2">{title}</h3>
+      <p class="text-sm text-muted leading-relaxed">{body}</p>
+    </div>
+  </div>
+) : (
+  <div
+    class="rounded-2xl border p-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+    style="background-color: rgba(240,242,245,0.07); border-color: rgba(255,255,255,0.1);"
+  >
+    <div class="icon-box-light" aria-hidden="true">
+      <Fragment set:html={icon} />
+    </div>
+    <div>
+      <h3 class="font-serif font-bold text-white text-lg leading-snug mb-2">{title}</h3>
+      <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.7);">{body}</p>
+    </div>
+  </div>
+)}

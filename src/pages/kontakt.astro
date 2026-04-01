@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import SectionHeading from '../components/sections/SectionHeading.astro';
+import ContactForm from '../components/sections/ContactForm.astro';
+import GoogleMapsGate from '../components/sections/GoogleMapsGate.astro';
+import AccordionFAQ from '../components/sections/AccordionFAQ.astro';
+import { contactFaq } from '../data/faq';
+import { buildWebPageSchema } from '../utils/schema';
+
+const schema = buildWebPageSchema(
+  'Kontakt | Axiom Medical Transfer',
+  'https://www.axiom-medical-transfer.de/kontakt',
+  'Nehmen Sie Kontakt zu Axiom Medical Transfer auf. Kooperationsanfragen für Praxen und Kliniken in Düsseldorf und Umgebung.',
+);
+
+const mapsUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2494.123456789!2d6.797300!3d51.265400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8c9e8e1234567%3A0xabcdef1234567890!2sRotdornstra%C3%9Fe%2059%2C%2040472%20D%C3%BCsseldorf!5e0!3m2!1sde!2sde!4v1710000000000!5m2!1sde!2sde';
+---
+
+<BaseLayout
+  title="Kontakt | Axiom Medical Transfer"
+  description="Kontakt zu Axiom Medical Transfer. Kooperationsanfragen für Praxen und Kliniken in Düsseldorf, Meerbusch, Ratingen, Neuss und Köln."
+  schema={schema}
+>
+  <!-- Hero -->
+  <PageHero
+    label="Kontakt"
+    heading="Der erste Schritt ist ein Gespräch."
+    subheading="Wenn Sie eine Praxis oder Klinik führen und verstehen, worum es geht — sprechen Sie direkt mit uns. Kooperationen entstehen durch Gespräche, nicht durch Formulare."
+  />
+
+  <!-- Main Contact Section -->
+  <section class="section" style="background-color: var(--color-pearl);">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+
+        <!-- Contact Form (left, 3/5) -->
+        <div class="lg:col-span-3">
+          <SectionHeading
+            label="Anfrage"
+            heading="Nachricht senden"
+            subheading="Füllen Sie das Formular aus und wir melden uns in der Regel innerhalb eines Werktages bei Ihnen."
+            align="left"
+          />
+          <div class="mt-8">
+            <ContactForm />
+          </div>
+        </div>
+
+        <!-- Right: Contact details + Map (2/5) -->
+        <div class="lg:col-span-2 space-y-8">
+
+          <!-- Direct contact card -->
+          <div class="card-white p-7">
+            <h3 class="font-serif font-semibold text-xl mb-5" style="color: var(--color-navy);">
+              Direktkontakt
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background: rgba(27,43,75,0.07);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.02 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider mb-0.5" style="color: var(--color-muted);">Telefon</div>
+                  <a href="tel:+4921133775576" class="text-sm font-medium hover:underline" style="color: var(--color-navy);">0211 337755765</a>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background: rgba(27,43,75,0.07);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider mb-0.5" style="color: var(--color-muted);">E-Mail</div>
+                  <a href="mailto:axiom@medicaltransfer.de" class="text-sm font-medium hover:underline break-all" style="color: var(--color-navy);">axiom@medicaltransfer.de</a>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background: rgba(27,43,75,0.07);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider mb-0.5" style="color: var(--color-muted);">Adresse</div>
+                  <address class="not-italic text-sm leading-relaxed" style="color: var(--color-navy);">
+                    Rotdornstraße 59<br />40472 Düsseldorf
+                  </address>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style="background: rgba(27,43,75,0.07);">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B2B4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wider mb-0.5" style="color: var(--color-muted);">Erreichbarkeit</div>
+                  <p class="text-sm" style="color: var(--color-navy);">Nach Vereinbarung</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t" style="border-color: rgba(27,43,75,0.1);">
+              <p class="text-xs leading-relaxed" style="color: var(--color-muted);">
+                Ihre Daten werden vertraulich behandelt und ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Mehr dazu in unserer <a href="/datenschutz" class="underline" style="color: var(--color-navy);">Datenschutzerklärung</a>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Google Maps Gate -->
+          <div>
+            <h3 class="font-sans font-semibold text-sm uppercase tracking-wider mb-3" style="color: var(--color-muted);">Unser Standort</h3>
+            <GoogleMapsGate
+              embedUrl={mapsUrl}
+              address="Rotdornstraße 59, 40472 Düsseldorf"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact FAQ -->
+  <section class="section" style="background-color: white;">
+    <div class="container">
+      <div class="max-w-[720px]">
+        <SectionHeading
+          label="FAQ"
+          heading="Häufige Fragen zum Kontakt"
+          align="left"
+        />
+        <div class="mt-8">
+          <AccordionFAQ items={contactFaq} />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

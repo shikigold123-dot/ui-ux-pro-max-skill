@@ -1,0 +1,136 @@
+---
+import { serviceAreas } from '../../data/navigation';
+
+interface Props {
+  heading: string;
+  subheading: string;
+  label?: string;
+  ctaPrimary: { text: string; href: string };
+  ctaSecondary?: { text: string; href: string };
+  showServicePills?: boolean;
+}
+
+const {
+  heading,
+  subheading,
+  label,
+  ctaPrimary,
+  ctaSecondary,
+  showServicePills = false,
+} = Astro.props;
+---
+
+<section
+  class="relative min-h-[100dvh] flex items-center overflow-hidden"
+  style="background-color: #1B2B4B; padding-top: 72px;"
+  aria-label="Hero"
+>
+  <!-- Wave Background SVG -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 900"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <!-- Wave 1 -->
+      <path
+        class="wave-1"
+        d="M-100 600 Q200 350 500 480 Q800 610 1100 400 Q1320 250 1600 380 L1600 950 L-100 950 Z"
+        fill="rgba(240,242,245,0.05)"
+      />
+      <!-- Wave 2 -->
+      <path
+        class="wave-2"
+        d="M-100 700 Q300 500 600 620 Q900 740 1200 550 Q1380 430 1600 500 L1600 950 L-100 950 Z"
+        fill="rgba(255,255,255,0.04)"
+      />
+      <!-- Wave 3 -->
+      <path
+        class="wave-3"
+        d="M-100 800 Q250 650 550 720 Q850 790 1100 680 Q1350 570 1600 640 L1600 950 L-100 950 Z"
+        fill="rgba(240,242,245,0.035)"
+      />
+    </svg>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container relative z-10 py-16 md:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-center">
+
+      <!-- Left: Content -->
+      <div class="flex flex-col gap-7">
+        {label && (
+          <div class="animate-fade-up">
+            <span class="label-tag-light">{label}</span>
+          </div>
+        )}
+
+        <h1 class="display-heading text-white animate-fade-up-delay-1" set:html={heading} />
+
+        <p class="text-base md:text-lg text-white/70 leading-relaxed max-w-[540px] animate-fade-up-delay-2 font-sans">
+          {subheading}
+        </p>
+
+        <div class="flex flex-wrap gap-3 animate-fade-up-delay-3">
+          <a href={ctaPrimary.href} class="btn-primary bg-white text-navy hover:bg-pearl border-white hover:border-pearl">
+            {ctaPrimary.text}
+          </a>
+          {ctaSecondary && (
+            <a href={ctaSecondary.href} class="btn-ghost-light">
+              {ctaSecondary.text}
+            </a>
+          )}
+        </div>
+
+        {showServicePills && (
+          <div class="flex flex-wrap gap-2 animate-fade-up-delay-4">
+            <span class="text-xs text-white/40 self-center mr-1">Einzugsgebiet:</span>
+            {serviceAreas.map((area) => (
+              <span class="service-pill">
+                <svg width="5" height="5" viewBox="0 0 5 5" fill="currentColor" class="text-white/40" aria-hidden="true">
+                  <circle cx="2.5" cy="2.5" r="2.5"/>
+                </svg>
+                {area}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Right: Team Portrait -->
+      <div class="hidden lg:flex items-center justify-center animate-fade-up-delay-2">
+        <div class="hero-portrait-wrapper">
+          <!-- Outer glow ring -->
+          <div class="hero-portrait-ring" aria-hidden="true"></div>
+          <!-- Portrait frame -->
+          <div class="hero-portrait-frame">
+            <img
+              src="/team-portrait.jpg"
+              alt="Axiom Medical Transfer — Persönlicher Service, Vertrauen und Diskretion"
+              class="hero-portrait-img"
+              loading="eager"
+              decoding="async"
+              width="360"
+              height="480"
+            />
+            <!-- Subtle gradient overlay -->
+            <div class="hero-portrait-overlay" aria-hidden="true"></div>
+          </div>
+          <!-- Decorative accent line top-right -->
+          <div class="hero-portrait-accent-tr" aria-hidden="true"></div>
+          <!-- Decorative accent line bottom-left -->
+          <div class="hero-portrait-accent-bl" aria-hidden="true"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom fade -->
+  <div
+    class="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+    style="background: linear-gradient(to bottom, transparent, rgba(27,43,75,0.4));"
+    aria-hidden="true"
+  ></div>
+</section>

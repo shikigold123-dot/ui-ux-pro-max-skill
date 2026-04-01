@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import SectionHeading from '../components/sections/SectionHeading.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+import PullQuote from '../components/sections/PullQuote.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import { buildWebPageSchema } from '../utils/schema';
+
+const schema = buildWebPageSchema(
+  'Über uns | Axiom Medical Transfer',
+  'https://www.axiom-medical-transfer.de/ueber-uns',
+  'Axiom Medical Transfer — gegründet von Saida Taufek. Diskreter, persönlicher Einzeltransfer für medizinische Termine in Düsseldorf und Umgebung.',
+);
+
+const eyeIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+
+const lockIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`;
+
+const checkCircleIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+
+const leafIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 19.34a1 1 0 00.95 1.5H8.5c7 0 10-5 10-10 0-2-.5-4-1.5-5z"/><path d="M3 20c0-3 2-8 8-8"/></svg>`;
+---
+
+<BaseLayout
+  title="Über uns | Axiom Medical Transfer"
+  description="Axiom Medical Transfer — gegründet von Saida Taufek in Düsseldorf. Diskreter Einzeltransfer für medizinische Termine. Persönlich. Zuverlässig. Achtsam."
+  schema={schema}
+>
+  <!-- Hero -->
+  <PageHero
+    label="Wer wir sind"
+    heading="Persönlich. Zuverlässig. Achtsam."
+    subheading="Axiom Medical Transfer entstand aus einer einfachen Beobachtung im Praxisalltag: Der medizinische Termin selbst wird mit größter Sorgfalt vorbereitet — doch die Fahrt danach bleibt oft organisatorisch geregelt."
+  />
+
+  <!-- Mission text (pearl bg) -->
+  <section class="section" style="background-color: var(--color-pearl);">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="label-tag">Unsere Mission</span>
+          <h2 class="section-heading mt-4 mb-8" style="color: var(--color-navy);">
+            Transfer als Teil der<br />Behandlungserfahrung.
+          </h2>
+        </div>
+        <div class="space-y-6">
+          <p class="text-base md:text-lg leading-relaxed" style="color: var(--color-navy); opacity: 0.85;">
+            Für Patienten kann dieser Moment entscheidend sein. Sie brauchen Ruhe, Diskretion und einen klaren Ablauf — wenn sie die Praxis oder Klinik verlassen.
+          </p>
+          <p class="text-base md:text-lg leading-relaxed" style="color: var(--color-navy); opacity: 0.75;">
+            Axiom Medical Transfer versteht Transfer daher als Teil der gesamten Behandlungserfahrung. Wir begleiten Patienten durch diese Phase aufmerksam und respektvoll — ohne Aufdringlichkeit, ohne Hast, ohne unnötige Aufmerksamkeit.
+          </p>
+          <p class="text-base md:text-lg leading-relaxed" style="color: var(--color-navy); opacity: 0.75;">
+            Unsere Fahrerinnen und Fahrer werden bewusst ausgewählt und geschult. Neben sicherem und professionellem Fahren gehört der respektvolle Umgang mit Menschen — für die dieser Moment privat ist — zu unserem Selbstverständnis. Sie erkennen, wann ein Gespräch hilfreich sein kann und wann Stille die bessere Begleitung ist.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values grid (navy bg) -->
+  <section class="section" style="background-color: #1B2B4B;">
+    <div class="container">
+      <SectionHeading
+        label="Unsere Werte"
+        heading="Was uns leitet"
+        light={true}
+        align="left"
+      />
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FeatureCard
+          icon={eyeIcon}
+          title="Persönlichkeit"
+          body="Wir sehen den Menschen, nicht nur den Fahrgast. Jede Begleitung beginnt mit dem Verständnis, dass dieser Moment für die betreffende Person bedeutsam ist."
+          variant="dark"
+        />
+        <FeatureCard
+          icon={lockIcon}
+          title="Diskretion"
+          body="Medizinische Termine sind privat. Wir behandeln sie entsprechend — von der Kommunikation bis zur Durchführung. Was im Fahrzeug bleibt, bleibt im Fahrzeug."
+          variant="dark"
+        />
+        <FeatureCard
+          icon={checkCircleIcon}
+          title="Zuverlässigkeit"
+          body="Präzision in jedem Detail, von der Koordination bis zur Ankunft. Pünktlichkeit und strukturierte Abläufe sind keine Option, sondern Grundvoraussetzung."
+          variant="dark"
+        />
+        <FeatureCard
+          icon={leafIcon}
+          title="Achtsamkeit"
+          body="Unsere Fahrer wissen, wann ein Gespräch helfen kann und wann Stille die bessere Begleitung ist. Feingefühl für den Moment ist Teil unserer Ausbildung."
+          variant="dark"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Pull Quote (pearl bg) -->
+  <section class="section" style="background-color: var(--color-pearl);">
+    <div class="container">
+      <PullQuote
+        quote="Eine Fahrt sieht von außen immer gleich aus: ein Fahrzeug, ein Ziel, eine Zeit. Was ein Mensch auf dem Rücksitz trägt, bleibt unsichtbar für die, die nicht genau hinschauen."
+        light={false}
+      />
+    </div>
+  </section>
+
+  <!-- CTA Banner (navy dark) -->
+  <CTABand
+    heading="Ihr Anspruch endet nicht an der Praxistür."
+    subheading="Wir begleiten Ihre Patienten darüber hinaus — diskret, zuverlässig und persönlich."
+    ctaPrimary={{ text: 'Kooperation anfragen', href: '/kontakt' }}
+    ctaSecondary={{ text: 'Unsere Leistungen', href: '/leistungen' }}
+  />
+</BaseLayout>

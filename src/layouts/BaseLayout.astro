@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import Navigation from '../components/layout/Navigation.astro';
+import Footer from '../components/layout/Footer.astro';
+import CookieBanner from '../components/layout/CookieBanner.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  ogType?: string;
+  schema?: object | object[];
+  bodyClass?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalURL,
+  ogType = 'website',
+  schema,
+  bodyClass = '',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://www.axiom-medical-transfer.de';
+const canonical = canonicalURL ?? siteUrl + Astro.url.pathname;
+const ogImage = `${siteUrl}/og-image.jpg`;
+
+const schemaJson = schema
+  ? (Array.isArray(schema) ? schema : [schema])
+      .map((s) => JSON.stringify(s, null, 0))
+  : [];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {noindex
+      ? <meta name="robots" content="noindex, nofollow" />
+      : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    }
+
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Axiom Medical Transfer" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#1B2B4B" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- JSON-LD Schema -->
+    {schemaJson.map((s) => (
+      <script type="application/ld+json" set:html={s} />
+    ))}
+  </head>
+  <body class={bodyClass}>
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+    <Navigation />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+  </body>
+</html>

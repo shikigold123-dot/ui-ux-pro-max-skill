@@ -1,0 +1,50 @@
+---
+interface Props {
+  label: string;
+  heading: string;
+  subheading?: string;
+}
+
+const { label, heading, subheading } = Astro.props;
+---
+
+<section
+  class="relative overflow-hidden"
+  style="background-color: #1B2B4B; padding-top: 72px;"
+  aria-label="Seitenheader"
+>
+  <!-- Subtle wave background -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 400"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <path
+        class="wave-1"
+        d="M-100 300 Q300 150 700 230 Q1100 310 1600 180 L1600 450 L-100 450 Z"
+        fill="rgba(255,255,255,0.04)"
+      />
+      <path
+        class="wave-2"
+        d="M-100 350 Q400 220 750 290 Q1050 360 1600 250 L1600 450 L-100 450 Z"
+        fill="rgba(240,242,245,0.03)"
+      />
+    </svg>
+  </div>
+
+  <div class="container relative z-10 py-20 md:py-28 text-center">
+    <div class="max-w-[700px] mx-auto">
+      <span class="label-tag-light animate-fade-up">{label}</span>
+      <h1 class="section-heading text-white mt-4 mb-5 animate-fade-up-delay-1">
+        {heading}
+      </h1>
+      {subheading && (
+        <p class="text-base md:text-lg text-white/70 leading-relaxed animate-fade-up-delay-2 font-sans">
+          {subheading}
+        </p>
+      )}
+    </div>
+  </div>
+</section>
