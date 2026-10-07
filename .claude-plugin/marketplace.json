@@ -30,6 +30,30 @@
       ],
       "category": "design",
       "strict": false
+    },
+    {
+      "name": "event-reel",
+      "source": "./",
+      "description": "Raw event footage (football, calisthenics, boxing, weddings, conferences, community events) + talk + music → production-ready 9:16 reel with kinetic typography, motion design, cleaned voice and sound design.",
+      "version": "1.0.0",
+      "author": {
+        "name": "shikigold123-dot"
+      },
+      "keywords": [
+        "video",
+        "reel",
+        "motion-design",
+        "kinetic-typography",
+        "editing",
+        "event",
+        "instagram",
+        "tiktok"
+      ],
+      "category": "media",
+      "strict": false,
+      "skills": [
+        "./.claude/skills/event-reel"
+      ]
     }
   ]
 }
